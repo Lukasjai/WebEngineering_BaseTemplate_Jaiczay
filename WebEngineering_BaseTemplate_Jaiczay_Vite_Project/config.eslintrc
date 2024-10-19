@@ -1,0 +1,30 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "settings": {
+    // Tells eslint how to resolve imports
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "rules": {
+    // add your custom rules here
+    "no-console": "off",   // disable warnings when logging to console
+    "linebreak-style": 0,  // disable LF and CRLF linebreak errors
+    "no-plusplus": "off"   // disable no-plusplus errors
+  },
+  "extends": [
+    // By extending from a plugin config, we can get recommended rules without having to add them manually.
+    "eslint:recommended",
+    "plugin:import/recommended",
+    "plugin:@typescript-eslint/recommended",
+    // This disables the formatting rules in ESLint that Prettier is going to be responsible for handling.
+    // Make sure it's always the last config, so it gets the chance to override other configs.
+    "eslint-config-prettier"
+  ]
+}
