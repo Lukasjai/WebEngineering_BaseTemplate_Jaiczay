@@ -16,3 +16,4 @@ const main = async () => {
 
 // Fetch and display the bear data
 main();
+

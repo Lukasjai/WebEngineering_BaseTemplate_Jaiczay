@@ -31,6 +31,7 @@ export const extractBears = async (wikitext) => {
             }
         }
 
+
         const moreBearsSection = document.querySelector('.more_bears');
         moreBearsSection.innerHTML = '';
 

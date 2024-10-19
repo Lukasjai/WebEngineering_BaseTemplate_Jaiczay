@@ -12,6 +12,7 @@ export const fetchImageUrl = async (fileName) => {
         origin: "*"
     };
 
+
     const url = `${baseUrl}?${new URLSearchParams(imageParams).toString()}`;
 
     try {
