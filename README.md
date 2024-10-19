@@ -57,9 +57,122 @@ Fix application code and answer the questions:
 >  **What bad coding practices did you find? Why is it a bad practice and how did you fix it?**
 
 Present your findings here...
-``` JS
-console.log('Make use of markdown codesnippets to show and explain good/bad practices!')
-```
+1) Changes that had been done in your points 1-3 (adapt the code to use asynch/wait ...)
+````JS
+//BEfore -->main.js
+function fetchImageUrl(fileName) {
+  var imageParams = {
+    action: "query",
+    titles: `File:${fileName}`,
+    prop: "imageinfo",
+    iiprop: "url",
+    format: "json",
+    origin: "*"
+  };
+
+  var url = `${baseUrl}?${new URLSearchParams(imageParams).toString()}`;
+  return fetch(url)
+          .then(function(res) {
+            return res.json();
+          })
+          .then(function(data) {
+            var pages = data.query.pages;
+            var imageUrl = Object.values(pages)[0].imageinfo[0].url;
+            return imageUrl;
+          });
+}
+
+//After --> bearData.js
+export const fetchImageUrl = async (fileName) => {
+  const imageParams = {
+    action: "query",
+    titles: `File:${fileName}`,
+    prop: "imageinfo",
+    iiprop: "url",
+    format: "json",
+    origin: "*"
+  };
+
+  const url = `${baseUrl}?${new URLSearchParams(imageParams).toString()}`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    const pages = data.query.pages;
+    const imageInfo = Object.values(pages)[0]?.imageinfo;
+
+    if (imageInfo && imageInfo[0].url) {
+      return imageInfo[0].url;
+    } else {
+      return '/media/urban-bear.jpg'; // Placeholder image
+    }
+  } catch (error) {
+    console.error('Error fetching image URL:', error);
+    alert('There was an error fetching the image. Please try again later.');
+    return '/media/urban-bear.jpg'; // Placeholder image in case of error
+  }
+};
+````
+
+2) using const and let instead of var <br>
+because var is function scoped which can lead to unexpacted behaviour in loops or conditions. With const and let beeing block scoped they are only accessible within the block they are declared in.
+````JS
+//Before --> main.js
+var showHideBtn = document.querySelector('.show-hide');
+var commentWrapper = document.querySelector('.comment-wrapper');
+//After -->bearData.js
+export const initializeComments = () => {
+  const showHideBtn = document.querySelector('.show-hide');
+  const commentWrapper = document.querySelector('.comment-wrapper');
+  ...
+````
+3) improved Error Handling <br>
+for easier debugging and customer interaction<br>
+see example in point 1) 
+
+
+
+4) switched from innerHTML to DOM manipulation <br>
+for better security --> prevent XSS - Cross-Site Scripting <br>
+and performance --> instead of recreating the whole DOM structure with innerHTML just maipulate the existing one.
+
+````JS
+//Before --> main.js
+
+if (bears.length === rows.length) {
+  var moreBearsSection = document.querySelector('.more_bears');
+  bears.forEach(function(bear) {
+    moreBearsSection.innerHTML += `
+                  <div>
+                      <h3>${bear.name} (${bear.binomial})</h3>
+                      <img src="${bear.image}" alt="${bear.name}" style="width:200px; height:auto;">
+                      <p><strong>Range:</strong> ${bear.range}</p>
+                  </div>
+              `;
+  });
+  
+//After -->bearData.js
+const moreBearsSection = document.querySelector('.more_bears');
+moreBearsSection.innerHTML = '';
+
+bears.forEach((bear) => {
+  const bearDiv = document.createElement('div');
+  const bearTitle = document.createElement('h3');
+  bearTitle.textContent = `${bear.name} (${bear.binomial})`;
+  bearDiv.appendChild(bearTitle);
+  const bearImage = document.createElement('img');
+  bearImage.src = bear.image;
+  bearImage.alt = bear.name;
+  bearImage.style.width = '200px';
+  bearImage.style.height = 'auto';
+  bearDiv.appendChild(bearImage);
+  const bearRange = document.createElement('p');
+  bearRange.innerHTML = `<strong>Range:</strong> ${bear.range}`;
+  bearDiv.appendChild(bearRange);
+  moreBearsSection.appendChild(bearDiv);
+});
+````
+
 
 
 ## 2. Dependency- and Build Management Playground (10 Pts.)
