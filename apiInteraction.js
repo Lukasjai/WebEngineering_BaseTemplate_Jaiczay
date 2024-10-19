@@ -18,7 +18,7 @@ export const fetchImageUrl = async (fileName) => {
         const res = await fetch(url);
         const data = await res.json();
         const pages = data.query.pages;
-        const imageInfo = Object.values(pages)[0].imageinfo;
+        const imageInfo = Object.values(pages)[0]?.imageinfo;
 
         if (imageInfo && imageInfo[0].url) {
             return imageInfo[0].url;

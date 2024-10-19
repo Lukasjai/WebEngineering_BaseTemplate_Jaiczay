@@ -32,15 +32,25 @@ export const extractBears = async (wikitext) => {
         }
 
         const moreBearsSection = document.querySelector('.more_bears');
+        moreBearsSection.innerHTML = '';
+
         bears.forEach((bear) => {
-            moreBearsSection.innerHTML += `
-            <div>
-                <h3>${bear.name} (${bear.binomial})</h3>
-                <img src="${bear.image}" alt="${bear.name}" style="width:200px; height:auto;">
-                <p><strong>Range:</strong> ${bear.range}</p>
-            </div>
-            `;
+            const bearDiv = document.createElement('div');
+            const bearTitle = document.createElement('h3');
+            bearTitle.textContent = `${bear.name} (${bear.binomial})`;
+            bearDiv.appendChild(bearTitle);
+            const bearImage = document.createElement('img');
+            bearImage.src = bear.image;
+            bearImage.alt = bear.name;
+            bearImage.style.width = '200px';
+            bearImage.style.height = 'auto';
+            bearDiv.appendChild(bearImage);
+            const bearRange = document.createElement('p');
+            bearRange.innerHTML = `<strong>Range:</strong> ${bear.range}`;
+            bearDiv.appendChild(bearRange);
+            moreBearsSection.appendChild(bearDiv);
         });
+
     } catch (error) {
         console.error('Error extracting the bear data', error);
         alert('There was an error fetching the bears. Please try again later.');
