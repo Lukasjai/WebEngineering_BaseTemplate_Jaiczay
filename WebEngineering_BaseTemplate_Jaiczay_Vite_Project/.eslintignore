@@ -3,3 +3,5 @@ dist/
 .prettierrc
 .eslintrc
 vite-env.d.ts
+public
+build

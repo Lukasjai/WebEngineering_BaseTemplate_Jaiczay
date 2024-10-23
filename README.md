@@ -227,6 +227,25 @@ Apply the following ruleset for Prettier:
 
 Present your findings here...
 
+1) Satic Type Checking, im gegenteil zu Javascript zwingt Typescript eine Typenüberprüfung zur Compilezeit was helfen kann typenbezogene Fehler früh zu erkennen.
+Unter den Schnittschtellen ImageIndo oder Page kann man diese Typenüberprüfung sehen
+````JS
+interface ImageInfo {
+url: string;
+}
+
+interface Page {
+imageinfo?: ImageInfo[];
+}
+````
+2) Improved Code Readability weil die Typenanotationen auch als eine Form der Dokumentation zu sehen sind. zum beispiel sieht man bei der Funktion extractBears sofort das diese einen String akzeptiert und ein Promise<void> zurückliefert
+````JS
+export const extractBears = async (wikitext: string): Promise<void> => { ...
+````
+3) IDE Unterstützung und verbesserte Werkzeuge
+   Funktionen wie Auto-Vervollständigung, Code-Navigation und Refactoring-Tools werden mit TypeScript laut Literatur effektiver, da der Editor die verwendeten Typen versteht.
+    Meine Meinung dazu ist das dies auch mit JS mit gewissene einschränkungen möglich ist. 
+
 ## 3.	CI/CD Pipeline Playground (5 Pts.)
 Implementation of a CI/CD pipeline to automate the development and deployment process – write automated tests.
 
