@@ -37,7 +37,7 @@ export const fetchImageUrl = async (fileName: string): Promise<string> => {
     const pages = data.query.pages;
     const imageInfo = Object.values(pages)[0]?.imageinfo;
 
-    if (imageInfo != null && imageInfo[0].url) {
+    if (imageInfo?.[0].url != null) {
       return imageInfo[0].url;
     } else {
       return '../media/urban-bear.jpg'; // Placeholder image
