@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   test:
     name: Test Application
@@ -57,7 +61,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build-artifact
-          path: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist
+          path: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist  # Ensure this path is correct
 
   deployment:
     name: Deploy to GitHub Pages
@@ -73,7 +77,7 @@ jobs:
       - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
-          name: build-artifact
+          name: build-artifact  # Ensure this matches the name used in the upload step
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v2
