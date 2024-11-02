@@ -9,10 +9,12 @@ const main = async (): Promise<void> => {
   initializeCommentForm();
 
   const wikitext: string | undefined = await getBearData();
-  if (wikitext) {
+  if (wikitext != null) {
     await extractBears(wikitext);
   }
 };
 
 // Fetch and display the bear data
-main();
+main().catch((error) => {
+  console.error('An error occurred in the main function:', error);
+});

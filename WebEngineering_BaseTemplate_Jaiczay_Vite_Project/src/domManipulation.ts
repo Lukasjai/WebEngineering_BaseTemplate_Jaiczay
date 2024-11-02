@@ -1,6 +1,7 @@
 // domManipulation.ts
 
 // Initialize the comments section
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const initializeComments = () => {
   const showHideBtn = document.querySelector<HTMLButtonElement>('.show-hide');
   const commentWrapper = document.querySelector<HTMLElement>('.comment-wrapper');
@@ -33,6 +34,7 @@ export const initializeComments = () => {
 };
 
 // Initialize the comment form
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const initializeCommentForm = () => {
   const form = document.querySelector<HTMLFormElement>('.comment-form');
   const nameField = document.querySelector<HTMLInputElement>('#name');
@@ -50,7 +52,7 @@ export const initializeCommentForm = () => {
           const nameValue = nameField.value.trim();
           const commentValue = commentField.value.trim();
 
-          if (!nameValue || !commentValue) {
+          if (nameValue === '' || commentValue === '') {
             throw new Error('Both name and comment are required.');
           }
 

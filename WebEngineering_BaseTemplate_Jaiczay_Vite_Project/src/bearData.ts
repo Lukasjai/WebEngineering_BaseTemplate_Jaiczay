@@ -1,5 +1,5 @@
 // bearData.ts
-//test
+
 import { fetchImageUrl } from './apiInteraction';
 
 // interface for the bear object
@@ -24,7 +24,12 @@ export const extractBears = async (wikitext: string): Promise<void> => {
         const imageMatch = row.match(/\|image=(.*?)\n/);
         const rangeMatch = row.match(/\|range=(.*?)\n/);
 
-        if (nameMatch?.[1] && binomialMatch?.[1] && imageMatch?.[1] && rangeMatch?.[1]) {
+        if (
+            nameMatch?.[1] != null &&
+            binomialMatch?.[1] != null &&
+            imageMatch?.[1] != null &&
+            rangeMatch?.[1] != null
+        ) {
           const fileName = imageMatch[1].trim().replace('File:', '');
           const imageUrl = await fetchImageUrl(fileName);
 
