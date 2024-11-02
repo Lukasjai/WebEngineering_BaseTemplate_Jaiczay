@@ -1,19 +1,12 @@
+
 {
   "env": {
     "browser": true,
     "node": true
   },
-  "module.exports" : {
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./tsconfig.eslint.json"
-  },
-
-
-
-"parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": "./tsconfig.json",
-
+    "project": ["./tsconfig.json", "./tsconfig.eslint.json"],
     "sourceType": "module"
   },
   "settings": {
@@ -24,7 +17,8 @@
       }
     }
   },
-  "ignorePatterns": ["vite.config.ts"],
+  "ignorePatterns": ["vite.config.ts",
+    "*.test.ts"],
   "rules": {
     "no-console": "off",
     "linebreak-style": 0,
