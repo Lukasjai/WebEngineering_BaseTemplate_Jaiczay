@@ -1,5 +1,5 @@
 // bearData.ts
-
+//test
 import { fetchImageUrl } from './apiInteraction';
 
 // interface for the bear object
