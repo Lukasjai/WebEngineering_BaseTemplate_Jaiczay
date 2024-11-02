@@ -10,7 +10,9 @@
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.ts --fix",
     "format": "prettier --write './src/**/*.{js,ts}'",
-    "format:check": "prettier --check './src/**/*.{js,ts}'"
+    "format:check": "prettier --check './src/**/*.{js,ts}'",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
     "@types/jest": "^29.5.13",
