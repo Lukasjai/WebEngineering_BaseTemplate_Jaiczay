@@ -21,6 +21,8 @@ jobs:
 
          - name: Install dependencies
            run: npm install
+           working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
 
          - name: Run tests
            run: npm run test --if-present
+           working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
