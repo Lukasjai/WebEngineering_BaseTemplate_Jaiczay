@@ -3,6 +3,7 @@ name: Development Workflow
 on:
   push: 
      branches: 
+      - development
       - main
       - second-playground
       - third-playground  # is triggered if push event in release branch occurs
