@@ -76,4 +76,4 @@ jobs:
           name: build-artifact # Ensure this matches the name used in the upload step
 
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v3
+        uses: actions/deploy-pages@v2
