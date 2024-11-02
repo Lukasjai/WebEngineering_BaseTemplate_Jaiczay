@@ -54,7 +54,7 @@ jobs:
         working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
 
       - name: Upload build artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist # Adjust the path to your build output
 
