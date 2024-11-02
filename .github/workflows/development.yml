@@ -1,28 +1,30 @@
 name: Development Workflow
 
 on:
-  push: 
-     branches: 
+  push:
+    branches:
       - development
       - main
 
 jobs:
   test:
-      name: Test Application
-      runs-on: ubuntu-latest
-      steps:
-         - name: Checkout repository
-           uses: actions/checkout@v3
+    name: Test Application
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-         - name: Setup node
-           uses: actions/setup-node@v3
-           with:
-              node-version: '18.x'
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
 
-         - name: Install dependencies
-           run: npm install
-           working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
+      - name: Install dependencies
+        run: |
+          npm install
+          npm install ts-node --save-dev
+        working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
 
-         - name: Run tests
-           run: npm run test --if-present
-           working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
+      - name: Run tests
+        run: npm run test --if-present
+        working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
