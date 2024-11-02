@@ -53,6 +53,9 @@ jobs:
         run: npm install
         working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
 
+      - name: List project files
+        run: ls -la ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
+
       - name: List build output directory
         run: ls -la ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist
 
