@@ -5,7 +5,7 @@
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./tsconfig.json",
+    "project": ["./tsconfig.json", "./tsconfig.eslint.json"],
     "sourceType": "module"
   },
   "settings": {
@@ -20,7 +20,11 @@
   "rules": {
     "no-console": "off",
     "linebreak-style": 0,
-    "no-plusplus": "off"
+    "no-plusplus": "off",
+    "@typescript-eslint/prefer-optional-chain": "warn",
+    "@typescript-eslint/strict-boolean-expressions": "warn",
+    "@typescript-eslint/explicit-function-return-type": "warn",
+    "@typescript-eslint/no-floating-promises": "warn"
   },
   "extends": [
     "standard-with-typescript",
