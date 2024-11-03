@@ -60,14 +60,14 @@ jobs:
       - name: Verify build directory
         run: ls -la ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist || echo "Build directory not found"
 
-      - name: Verify build directory
-        run: ls -la ./dist || echo "Build directory not found"
-
       - name: Upload build artifact
         uses: actions/upload-artifact@v3  # Corrected to the latest stable version
         with:
           name: buildArtifact
           path: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist  # Ensure this path is correct
+
+      - name: Verify build directory
+        run: ls -la ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist || echo "Build directory not found"
 
   deployment:
     name: Deploy to GitHub Pages
