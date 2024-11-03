@@ -51,7 +51,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
+      #  working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
 
       - name: Build project
         run: npm run build --verbose
@@ -61,13 +61,16 @@ jobs:
         run: ls -la ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist || echo "Build directory not found"
 
       - name: Upload build artifact
-        uses: actions/upload-pages-artifact@v2@v2  # Corrected to the latest stable version
+        uses: actions/upload-pages-artifact@v2  # Corrected to the latest stable version
         with:
           name: buildArtifact
           path: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist  # Ensure this path is correct
 
       - name: Verify build directory
         run: ls -la ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist || echo "Build directory not found"
+
+      - name: List uploaded artifacts
+        run: echo "Uploaded artifacts:" && ls -la ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist
 
   deployment:
     name: Deploy to GitHub Pages
