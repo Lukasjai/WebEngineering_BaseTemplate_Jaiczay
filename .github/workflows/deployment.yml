@@ -68,6 +68,18 @@ jobs:
       - name: List uploaded artifacts
         run: echo "Uploaded artifacts:" && ls -la ./dist
 
+      - name: Verify build output in dist folder
+        run: |
+          echo "Checking contents of the dist folder:"
+          if [ -d "./dist" ]; then
+            echo "dist folder found:"
+            ls -la ./dist
+          else
+            echo "Error: dist folder NOT found. Build might have failed."
+            exit 1
+          fi
+
+
   deployment:
     name: Deploy to GitHub Pages
     needs: [test, build]
