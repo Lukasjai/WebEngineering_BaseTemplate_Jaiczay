@@ -59,12 +59,6 @@ jobs:
           name: github-pages
           path: ./dist
 
-      - name: Verify build directory
-        run: ls -la ./dist || echo "Build directory not found"
-
-      - name: List uploaded artifacts
-        run: echo "Uploaded artifacts:" && ls -la ./dist
-
   deployment:
     name: Deploy to GitHub Pages
     needs: [test, build]
