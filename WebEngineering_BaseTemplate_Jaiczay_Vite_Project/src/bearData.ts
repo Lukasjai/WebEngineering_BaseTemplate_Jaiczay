@@ -25,10 +25,10 @@ export const extractBears = async (wikitext: string): Promise<void> => {
         const rangeMatch = row.match(/\|range=(.*?)\n/);
 
         if (
-            nameMatch?.[1] != null &&
-            binomialMatch?.[1] != null &&
-            imageMatch?.[1] != null &&
-            rangeMatch?.[1] != null
+          nameMatch?.[1] != null &&
+          binomialMatch?.[1] != null &&
+          imageMatch?.[1] != null &&
+          rangeMatch?.[1] != null
         ) {
           const fileName = imageMatch[1].trim().replace('File:', '');
           const imageUrl = await fetchImageUrl(fileName);
