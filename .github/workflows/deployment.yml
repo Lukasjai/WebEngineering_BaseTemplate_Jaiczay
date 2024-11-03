@@ -66,7 +66,7 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-artifact@v3  # Corrected to the latest stable version
         with:
-          name: build-artifact
+          name: buildArtifact
           path: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist  # Ensure this path is correct
 
   deployment:
@@ -83,7 +83,7 @@ jobs:
       - name: Download build artifacts
         uses: actions/download-artifact@v4.1.8
         with:
-          name: build-artifact
+          name: buildArtifact
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4.0.5
