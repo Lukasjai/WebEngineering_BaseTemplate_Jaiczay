@@ -59,7 +59,7 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-pages-artifact@v3.0.1
         with:
-        path: ./dist
+         path: ./dist
 
       - name: Verify build directory
         run: ls -la ./dist || echo "Build directory not found"
