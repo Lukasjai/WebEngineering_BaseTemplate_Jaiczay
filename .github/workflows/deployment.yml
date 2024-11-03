@@ -57,10 +57,9 @@ jobs:
         run: npm run build
 
       - name: Upload build artifact
-        uses: actions/upload-pages-artifact@v2  # Corrected to the latest stable version
+        uses: actions/upload-pages-artifact@v3.0.1
         with:
-          name: buildArtifact
-          path: ./dist  # Ensure this path is correct
+        path: ./dist
 
       - name: Verify build directory
         run: ls -la ./dist || echo "Build directory not found"
@@ -92,7 +91,7 @@ jobs:
         uses: actions/configure-pages@v3
 
       - name: Download build artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: buildArtifact
 
