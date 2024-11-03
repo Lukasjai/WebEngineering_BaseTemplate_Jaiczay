@@ -54,7 +54,7 @@ jobs:
         working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
 
       - name: Build project
-        run: npm run build
+        run: npm run build --verbose
         working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
 
       - name: Upload build artifact
