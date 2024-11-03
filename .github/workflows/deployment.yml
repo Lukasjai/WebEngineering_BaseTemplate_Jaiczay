@@ -61,7 +61,7 @@ jobs:
         run: ls -la ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist || echo "Build directory not found"
 
       - name: Upload build artifact
-        uses: actions/upload-pages-artifact@v2@v2  # Corrected to the latest stable version
+        uses: actions/upload-pages-artifact@v2  # Corrected to the latest stable version
         with:
           name: buildArtifact
           path: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist  # Ensure this path is correct
