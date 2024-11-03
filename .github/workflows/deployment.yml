@@ -1,28 +1,89 @@
-build:
-  name: Build Application
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+name: Deployment Workflow
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18.x'
+on:
+  push:
+    branches:
+      - main
 
-    - name: Install dependencies
-      run: npm install
-      working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
+permissions:
+  id-token: write
+  contents: read
 
-    - name: List project files
-      run: ls -la ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
+jobs:
+  test:
+    name: Test Application
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Build project
-      run: npm run build
-      working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
 
-    - name: Upload build artifact
-      uses: actions/upload-artifact@v3  # Updated to stable v3
-      with:
-        name: build-artifact
-        path: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist
+      - name: Install dependencies
+        run: |
+          npm install
+          npm install ts-node jest-environment-jsdom eslint --save-dev
+        working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
+
+      - name: Lint code
+        run: |
+          npx eslint . --ext .js,.ts --fix
+        working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
+
+      - name: Run tests
+        run: npm run test --if-present
+        working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
+
+  build:
+    name: Build Application
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.2.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4.0.4
+        with:
+          node-version: '20.x'
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
+
+      - name: List project files
+        run: ls -la ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
+
+      - name: List build output directory
+        run: ls -la ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist
+
+      - name: Build project
+        run: npm run build
+        working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3  # Corrected to the latest stable version
+        with:
+          name: build-artifact
+          path: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist  # Ensure this path is correct
+
+  deployment:
+    name: Deploy to GitHub Pages
+    needs: [test, build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.2.0
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5.0.0
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: build-artifact
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4.0.5
