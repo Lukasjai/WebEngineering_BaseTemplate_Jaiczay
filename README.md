@@ -271,6 +271,8 @@ Test the current color contrast (text/background), report the results of the tes
 
 *Present your reports here.*
 
+![Frontend.png](media%2FFrontend.png)
+
 **(0.5) Semantic HTML**
 
 Report on what happens when you try to navigate the page using a screen reader. Fix those navigation issues.
