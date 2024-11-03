@@ -51,7 +51,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
+      #  working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
 
       - name: Build project
         run: npm run build --verbose
