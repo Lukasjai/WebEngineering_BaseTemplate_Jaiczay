@@ -289,19 +289,70 @@ The ``<audio>`` player isn't accessible to hearing impaired (deaf) people — ca
   * The ``<input>`` element in the search form at the top could do with a label, but we don't want to add a visible text label that would potentially spoil the design and isn't really needed by sighted users. Fix this issue by adding a label that is only accessible to screen readers.
   * The two ``<input>`` elements in the comment form have visible text labels, but they are not unambiguously associated with their labels — how do you achieve this? Note that you'll need to update some of the CSS rule as well.
 
-*Present your findings and fixes here.*
+````HTML
+ <form class="search">
+    <label for="search" class="sr-only">Search query</label>
+    <input type="search" id="search" name="q" placeholder="Search query" aria-label="Search query">
 
+  <div class="flex-pair">
+    <label for="name">Your name:</label>
+    <input type="text" name="name" id="name" placeholder="Enter your name">
+
+    <div class="flex-pair">
+      <label for="comment">Your comment:</label>
+      <input type="text" name="comment" id="comment" placeholder="Enter your comment">
+````
 **(0.5) Comment section**
 
 The show/hide comment control button is not currently keyboard-accessible. Can you make it keyboard accessible, both in terms of focusing it using the tab key, and activating it using the return key?
+````HTML
+showHideBtn.setAttribute('tabindex', '0');
+showHideBtn.setAttribute('role', 'button');
 
-*Present your findings and fixes here.*
+showHideBtn.onkeypress = (event) => {
+if (event.key === 'Enter' || event.key === ' ') {
+toggleComments(showHideBtn, commentWrapper);
+}
+};
+
+````
 
 **(1) The table**
 
 The data table is not currently very accessible — it is hard for screen reader users to associate data rows and columns together, and the table also has no kind of summary to make it clear what it shows. Can you add some features to your HTML to fix this problem?
-
-*Present your findings and fixes here.*
+````HTML
+<table>
+      <caption>This table lists types of bears along with their characteristics including coat color, adult size, habitat, lifespan, and diet.</caption>
+      <thead>
+      <tr>
+        <th scope="col">Bear Type</th>
+        <th scope="col">Coat</th>
+        <th scope="col">Adult size</th>
+        <th scope="col">Habitat</th>
+        <th scope="col">Lifespan</th>
+        <th scope="col">Diet</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row">Wild</th>
+        <td>Brown or black</td>
+        <td>1.4 to 2.8 meters</td>
+        <td>Woods and forests</td>
+        <td>25 to 28 years</td>
+        <td>Fish, meat, plants</td>
+      </tr>
+      <tr>
+        <th scope="row">Urban</th>
+        <td>North Face</td>
+        <td>18 to 22</td>
+        <td>Condos and coffee shops</td>
+        <td>20 to 32 years</td>
+        <td>Starbucks, sushi</td>
+      </tr>
+      </tbody>
+    </table>
+````
 
 **(1) More Findings**
 

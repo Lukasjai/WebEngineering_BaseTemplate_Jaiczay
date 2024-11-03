@@ -3,7 +3,7 @@
 // Initialize the comments section
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const initializeComments = () => {
-  const showHideBtn = document.querySelector<HTMLButtonElement>('.show-hide');
+  const showHideBtn = document.querySelector<HTMLDivElement>('.show-hide');
   const commentWrapper = document.querySelector<HTMLElement>('.comment-wrapper');
 
   if (commentWrapper != null) {
@@ -11,25 +11,40 @@ export const initializeComments = () => {
   }
 
   if (showHideBtn != null) {
-    showHideBtn.onclick = () => {
-      try {
-        const showHideText = showHideBtn.textContent;
-        if (showHideText === 'Show comments') {
-          showHideBtn.textContent = 'Hide comments';
-          if (commentWrapper != null) {
-            commentWrapper.style.display = 'block';
-          }
-        } else {
-          showHideBtn.textContent = 'Show comments';
-          if (commentWrapper != null) {
-            commentWrapper.style.display = 'none';
-          }
-        }
-      } catch (error) {
-        console.error('Error showing/hiding comments:', error);
-        alert('There was an error toggling the comments section. Please try again.');
+    // Make the button keyboard accessible
+    showHideBtn.setAttribute('tabindex', '0');
+    showHideBtn.setAttribute('role', 'button');
+
+    // Event listener for click
+    showHideBtn.onclick = () => toggleComments(showHideBtn, commentWrapper);
+
+    // Event listener for keyboard activation (Enter and Space keys)
+    showHideBtn.onkeypress = (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        toggleComments(showHideBtn, commentWrapper);
       }
     };
+  }
+};
+
+// Toggle comments visibility function
+const toggleComments = (showHideBtn: HTMLElement, commentWrapper: HTMLElement | null): void => {
+  try {
+    const showHideText = showHideBtn.textContent;
+    if (showHideText === 'Show comments') {
+      showHideBtn.textContent = 'Hide comments';
+      if (commentWrapper != null) {
+        commentWrapper.style.display = 'block';
+      }
+    } else {
+      showHideBtn.textContent = 'Show comments';
+      if (commentWrapper != null) {
+        commentWrapper.style.display = 'none';
+      }
+    }
+  } catch (error) {
+    console.error('Error showing/hiding comments:', error);
+    alert('There was an error toggling the comments section. Please try again.');
   }
 };
 
