@@ -22,5 +22,8 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "jest.config.ts"]
+  "include": [
+    "./src",
+    "jest.config.ts"
+  ]
 }

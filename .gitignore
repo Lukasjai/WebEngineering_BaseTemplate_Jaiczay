@@ -7,7 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
+WebEngineering_BaseTemplate_Jaiczay_Vite_Project/node_modules
 dist
 dist-ssr
 build
@@ -23,5 +23,8 @@ build
 *.njsproj
 *.sln
 *.sw?
+typescript.svg
+vite.svg
+vite-env.d.ts
 
 coverage

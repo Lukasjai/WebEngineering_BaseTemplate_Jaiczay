@@ -27,16 +27,16 @@ jobs:
         run: |
           npm install
           npm install ts-node jest-environment-jsdom eslint --save-dev
-        working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
+     
 
       - name: Lint code
         run: |
           npx eslint . --ext .js,.ts --fix
-        working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
+        
 
       - name: Run tests
         run: npm run test --if-present
-        working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
+
 
   build:
     name: Build Application
@@ -52,27 +52,21 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
-
 
       - name: Build project
-        run: npm run build --verbose
-        working-directory: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project
-
-      - name: Verify build directory
-        run: ls -la ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist || echo "Build directory not found"
+        run: npm run build
 
       - name: Upload build artifact
         uses: actions/upload-pages-artifact@v2  # Corrected to the latest stable version
         with:
           name: buildArtifact
-          path: ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist  # Ensure this path is correct
+          path: ./dist  # Ensure this path is correct
 
       - name: Verify build directory
-        run: ls -la ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist || echo "Build directory not found"
+        run: ls -la ./dist || echo "Build directory not found"
 
       - name: List uploaded artifacts
-        run: echo "Uploaded artifacts:" && ls -la ./WebEngineering_BaseTemplate_Jaiczay_Vite_Project/dist
+        run: echo "Uploaded artifacts:" && ls -la ./dist
 
   deployment:
     name: Deploy to GitHub Pages
